@@ -2,7 +2,7 @@
 // console.log(process.release.lts)
 
 // ! 1
-// if (process.release.lts !== 'Jod') {
+// if (process.release.lts !== 'Krypton') {
 //   throw new Error('Wrong node.js version')
 // }
 //

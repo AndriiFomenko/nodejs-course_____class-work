@@ -1,4 +1,4 @@
-// if (process.versions.node !== '22.19.0') {
+// if (process.versions.node !== '24.11.0') {
 //   throw new Error('Wrong node.js version')
 // }
 //
@@ -8,7 +8,7 @@ const majorNodeVersion = +process.versions.node.slice(0, 2)
 console.log(majorNodeVersion)
 console.log(typeof majorNodeVersion)
 
-if (majorNodeVersion < 20) {
+if (majorNodeVersion < 22) {
   throw new Error('Wrong node.js version')
 }
 

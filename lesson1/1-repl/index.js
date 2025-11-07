@@ -10,8 +10,8 @@
 // }
 
 // ! 2
-// const repl = require('repl')
-// repl.start()
+const repl = require('repl')
+repl.start()
 
 /*
  .help
