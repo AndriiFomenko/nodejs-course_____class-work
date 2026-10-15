@@ -1,4 +1,3 @@
-
 const getData = require('./index.js');
 
 const expectedUser = { name: 'John', age: 25, sex: 'male' };

@@ -1,4 +1,3 @@
-
 const { delayedCallback } = require('./index.js');
 
 test('delayedCallback calls the callback after a delay', () => {

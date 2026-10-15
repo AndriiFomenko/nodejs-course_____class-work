@@ -2,9 +2,9 @@
 const path = require('path');
 
 const promises = {
-  readFile: jest.fn((filename) => Promise.resolve('success')),
+  readFile: jest.fn(() => Promise.resolve('success')),
 
-  access: jest.fn((filename) => Promise.resolve()),
+  access: jest.fn(() => Promise.resolve()),
 };
 
 module.exports = {

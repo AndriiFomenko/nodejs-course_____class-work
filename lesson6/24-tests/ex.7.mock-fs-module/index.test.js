@@ -1,4 +1,3 @@
-
 const getData = require('./index');
 
 jest.mock('fs');
