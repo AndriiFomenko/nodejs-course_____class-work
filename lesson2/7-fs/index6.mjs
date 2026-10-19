@@ -10,4 +10,4 @@ async function copyAndAppend() {
   }
 }
 
-copyAndAppend().catch(console.log)
+copyAndAppend()

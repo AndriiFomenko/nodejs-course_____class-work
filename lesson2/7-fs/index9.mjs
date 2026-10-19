@@ -11,3 +11,4 @@ async function checkFileAccess(filePath) {
 
 checkFileAccess('./input.txt')
 checkFileAccess('./target.txt')
+checkFileAccess('./tempDirectory')

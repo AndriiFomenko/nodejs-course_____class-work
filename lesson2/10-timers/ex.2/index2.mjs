@@ -1,7 +1,7 @@
 import http from 'http'
 
 const server = http.createServer((req, res) => {
-  // Тут ми можемо додати код для обробки запитів
+  res.end('Hello World!')
 })
 
 server.listen(3030, () => {
@@ -13,7 +13,9 @@ const timer = setInterval(() => {
 }, 1000)
 
 setTimeout(() => {
+  console.log('Closing server...')
+  clearInterval(timer)
   server.close(() => {
-    clearInterval(timer)
+    console.log('Server closed.')
   })
 }, 3000)
