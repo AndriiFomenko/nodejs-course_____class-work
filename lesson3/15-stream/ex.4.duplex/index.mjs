@@ -7,7 +7,8 @@ const inputStream = new Duplex({
   },
 
   read() {
-    if (this.currentCharCode > 90) { // Z is 90
+    // ACSII => Z is 90
+    if (this.currentCharCode > 90) {
       this.push(null)
       return
     }
@@ -15,6 +16,6 @@ const inputStream = new Duplex({
   }
 })
 
-inputStream.currentCharCode = 65 // 65 is A
+inputStream.currentCharCode = 65 //  ACSII => 65 is A
 
 inputStream.pipe(process.stdout)

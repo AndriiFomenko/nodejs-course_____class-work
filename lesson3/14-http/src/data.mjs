@@ -1,46 +1,91 @@
-import {
-  createHTMLTemplate,
-  rootContent,
-  notFoundContent,
-  todoFormContent,
-  todoListContent
-} from './strings.mjs'
+import fs from 'node:fs/promises'
 
-export const rootTemplate = () => createHTMLTemplate(rootContent)
+const createHtmlTemplate = (htmlInjection) => `
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+    </head>
+    <body>
+      <div style='width: min(100% - 40px, 992px); margin-inline: auto;'>
+        ${htmlInjection}
+      </div>
+    </body>
+    </html>
+`
 
-export const notFoundTemplate = () =>
-  createHTMLTemplate(notFoundContent, '404 - Not Found')
+const rootHtmlTemplate = createHtmlTemplate('<h1>Hello world</h1>')
 
-export const todoFormTemplate = () =>
-  createHTMLTemplate(todoFormContent, 'Create New Todo')
+const notFoundTemplate = createHtmlTemplate('<h1>404 Not Found</h1>')
 
-export const todoListTemplate = (todos) =>
-  createHTMLTemplate(todoListContent(todos), 'Todo List')
+let formTemplate
 
-export const todos = [
+const loadFormTemplate = async () => {
+  try {
+    formTemplate = await fs.readFile('./src/templates/form.html')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+loadFormTemplate()
+
+const generateTodosTemplate = () => {
+  const todosHtml = todos
+    .map(
+      (todo) => `
+    <div>
+      <h2>${todo.title}</h2>
+      <p>User ID: ${todo.userId}</p>
+      <p>Todo ID: ${todo.id}</p>
+      <p>Completed: ${todo.completed ? 'Yes' : 'No'}</p>
+    </div>
+  `
+    )
+    .join('')
+
+  const buttonHtml = `<button onclick="window.location.href = '/form'">Add new todo</button>`
+  return createHtmlTemplate(`<h1>List of Todos</h1>${todosHtml}${buttonHtml}`)
+}
+
+const todos = [
   {
+    userId: 1,
     id: 1,
-    title: 'Learn Node.js',
+    title: 'delectus aut autem',
+    completed: false
+  },
+  {
+    userId: 1,
+    id: 2,
+    title: 'quis ut nam facilis et officia qui',
+    completed: false
+  },
+  {
+    userId: 1,
+    id: 3,
+    title: 'fugiat veniam minus',
+    completed: false
+  },
+  {
+    userId: 1,
+    id: 4,
+    title: 'et porro tempora',
     completed: true
   },
   {
-    id: 2,
-    title: 'Learn Express.js',
-    completed: false
-  },
-  {
-    id: 3,
-    title: 'Learn MongoDB',
-    completed: false
-  },
-  {
-    id: 4,
-    title: 'Build a REST API',
-    completed: false
-  },
-  {
+    userId: 1,
     id: 5,
-    title: 'Deploy to Vercel',
+    title: 'laboriosam mollitia et enim quasi adipisci quia provident illum',
     completed: false
   }
 ]
+
+export {
+  rootHtmlTemplate,
+  notFoundTemplate,
+  todos,
+  formTemplate,
+  generateTodosTemplate
+}

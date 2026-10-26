@@ -9,3 +9,5 @@ if (require.main === module) {
 } else {
   module.exports = draw
 }
+
+// node drawline.js 20 "Hello Node.js"

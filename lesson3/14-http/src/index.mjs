@@ -1,44 +1,43 @@
 import http from 'node:http'
 import {
-  handleGetRoot,
-  handleGetTodoForm,
-  handleGetText,
-  handleGetJson,
-  handleGetTodos,
-  handlePostTodos,
-  handleNotFound
+  generateRootHtml,
+  generateText,
+  generateJson,
+  getTodos,
+  postTodo,
+  generateNotFound,
+  generateForm
 } from './api.mjs'
 
 const PORT = 3000
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
-    return handleGetRoot(req, res)
-  }
-
-  if (req.method === 'GET' && req.url === '/form') {
-    return handleGetTodoForm(req, res)
+    return generateRootHtml(req, res)
   }
 
   if (req.method === 'GET' && req.url === '/text') {
-    return handleGetText(req, res)
+    return generateText(req, res)
   }
 
   if (req.method === 'GET' && req.url === '/json') {
-    return handleGetJson(req, res)
+    return generateJson(req, res)
   }
 
   if (req.method === 'GET' && req.url === '/todos') {
-    return handleGetTodos(req, res)
+    return getTodos(req, res)
   }
-
   if (req.method === 'POST' && req.url === '/todos') {
-    return handlePostTodos(req, res)
+    return postTodo(req, res)
   }
 
-  handleNotFound(req, res)
+  if (req.method === 'GET' && req.url === '/form') {
+    return generateForm(req, res)
+  }
+
+  return generateNotFound(req, res)
 })
 
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+  console.log(`The server is running on port ${PORT}`)
 })
